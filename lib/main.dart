@@ -1,14 +1,14 @@
-import 'package:bytebank2/database/app_database.dart';
-import 'package:bytebank2/models/contact.dart';
 import 'package:bytebank2/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 
 void main() {
-  runApp(BytebankApp());
+  runApp(const BytebankApp());
 }
 
 class BytebankApp extends StatelessWidget {
+  const BytebankApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class BytebankApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: Dashboard(),
+      home: const Dashboard(),
     );
   }
 }
