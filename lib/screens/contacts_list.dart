@@ -1,13 +1,20 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bytebank2/database/dao/contact_dao.dart';
 import 'package:bytebank2/models/contact.dart';
 import 'package:bytebank2/screens/contact_form.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatelessWidget {
+class ContactsList extends StatefulWidget {
+  const ContactsList({super.key});
 
+  @override
+  _ContactsListState createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
   final ContactDao _dao = ContactDao();
 
-  ContactsList({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +33,10 @@ class ContactsList extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [CircularProgressIndicator(), Text('Loading')],
+                  children: const <Widget>[
+                    CircularProgressIndicator(),
+                    Text('Loading')
+                  ],
                 ),
               );
             case ConnectionState.active:
@@ -46,10 +56,14 @@ class ContactsList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
+          Navigator.of(context)
+              .push(
             MaterialPageRoute(
               builder: (context) => const ContactForm(),
             ),
+          )
+              .then(
+                (value) => setState(() {}),
           );
         },
         child: const Icon(
@@ -59,12 +73,9 @@ class ContactsList extends StatelessWidget {
     );
   }
 }
-
 class _ContactItem extends StatelessWidget {
   final Contact contact;
-
   const _ContactItem(this.contact);
-
   @override
   Widget build(BuildContext context) {
     return Card(
