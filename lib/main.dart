@@ -1,4 +1,4 @@
-import 'package:bytebank2/models/contact.dart';
+
 import 'package:bytebank2/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +6,7 @@ import 'database/app_database.dart';
 
 void main() {
   runApp(BytebankApp());
+
     findAll().then((contacts) => debugPrint(contacts.toString()));
 }
 
