@@ -1,9 +1,11 @@
+import 'package:bytebank2/http/webclient.dart';
 import 'package:bytebank2/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 
 void main() {
   runApp(const BytebankApp());
+  findAll();
 }
 
 class BytebankApp extends StatelessWidget {
