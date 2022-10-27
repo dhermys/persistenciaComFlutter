@@ -53,8 +53,8 @@ class _TransactionFormState extends State<TransactionForm> {
                   controller: _valueController,
                   style: const TextStyle(fontSize: 24.0),
                   decoration: const InputDecoration(labelText: 'Value'),
-                  keyboardType: const TextInputType.numberWithOptions(
-                      decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
               Padding(
@@ -65,18 +65,18 @@ class _TransactionFormState extends State<TransactionForm> {
                     child: const Text('Transfer'),
                     onPressed: () {
                       final double? value =
-                      double.tryParse(_valueController.text);
+                          double.tryParse(_valueController.text);
                       final transactionCreated =
-                      Transaction(value!, widget.contact);
-                      showDialog(context: context, builder: (context) {
-                        return TransactionAuthDialog(onConfirm: (String password) {
-                          _webClient.save(transactionCreated, password).then((transaction) {
-                            if (transaction != null) {
-                              Navigator.pop(context);
-                            }
+                          Transaction(value!, widget.contact);
+                      showDialog(
+                          context: context,
+                          builder: (contextDialog) {
+                            return TransactionAuthDialog(
+                              onConfirm: (String password) {
+                                _save(transactionCreated, password, context);
+                              },
+                            );
                           });
-                        },);
-                      });
                     },
                   ),
                 ),
@@ -86,5 +86,17 @@ class _TransactionFormState extends State<TransactionForm> {
         ),
       ),
     );
+  }
+
+  void _save(
+    Transaction transactionCreated,
+    String password,
+    BuildContext context,
+  ) async {
+    _webClient.save(transactionCreated, password).then((transaction) {
+      if (transaction != null) {
+        Navigator.pop(context);
+      }
+    });
   }
 }
