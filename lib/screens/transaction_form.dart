@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:bytebank2/components/transactiom_auth_dialog.dart';
 import 'package:bytebank2/http/webclients/transaction_webclient.dart';
 import 'package:bytebank2/models/contact.dart';
 import 'package:bytebank2/models/transaction.dart';
@@ -52,7 +53,8 @@ class _TransactionFormState extends State<TransactionForm> {
                   controller: _valueController,
                   style: const TextStyle(fontSize: 24.0),
                   decoration: const InputDecoration(labelText: 'Value'),
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true),
                 ),
               ),
               Padding(
@@ -63,13 +65,17 @@ class _TransactionFormState extends State<TransactionForm> {
                     child: const Text('Transfer'),
                     onPressed: () {
                       final double? value =
-                          double.tryParse(_valueController.text);
+                      double.tryParse(_valueController.text);
                       final transactionCreated =
-                          Transaction(value!, widget.contact);
-                      _webClient.save(transactionCreated).then((transaction) {
-                        if (transaction != null) {
-                          Navigator.pop(context);
-                        }
+                      Transaction(value!, widget.contact);
+                      showDialog(context: context, builder: (context) {
+                        return TransactionAuthDialog(onConfirm: (String password) {
+                          _webClient.save(transactionCreated, password).then((transaction) {
+                            if (transaction != null) {
+                              Navigator.pop(context);
+                            }
+                          });
+                        },);
                       });
                     },
                   ),
