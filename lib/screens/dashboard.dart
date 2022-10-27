@@ -9,17 +9,17 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Image.asset('images/bytebank_logo.png'),
           ),
-          Container(
+          SizedBox(
             height: 120,
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -45,7 +45,7 @@ class Dashboard extends StatelessWidget {
   void _showContactsList(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ContactsList(),
+        builder: (context) => const ContactsList(),
       ),
     );
   }

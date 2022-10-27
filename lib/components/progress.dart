@@ -4,7 +4,7 @@ class Progress extends StatelessWidget {
 
   final String message;
 
-  Progress({this.message = 'Loading'});
+  const Progress({super.key, this.message = 'Loading'});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class Progress extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          CircularProgressIndicator(),
+          const CircularProgressIndicator(),
           Text(message)
         ],
       ),
