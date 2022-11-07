@@ -7,6 +7,6 @@ final Client client = InterceptedClient.build(
   interceptors: [LoggingInterceptor()],
 );
 
-var baseUrl = Uri.parse('http://192.168.0.173:8080/transactions');
+var baseUrl = Uri.parse('http://192.168.1.9:8080/transactions');
 
 
