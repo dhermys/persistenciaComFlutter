@@ -1,5 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'dart:async';
+
 import 'package:bytebank2/components/response_dialog.dart';
 import 'package:bytebank2/components/transactiom_auth_dialog.dart';
 import 'package:bytebank2/http/webclients/transaction_webclient.dart';
@@ -99,9 +101,15 @@ class _TransactionFormState extends State<TransactionForm> {
       showDialog(
           context: context,
           builder: (contextDialog) {
+            return FailureDialog('timeout submitting the transaction');
+          });
+    }, test: (e) => e is TimeoutException).catchError((e) {
+      showDialog(
+          context: context,
+          builder: (contextDialog) {
             return FailureDialog(e.message);
           });
-    }, test: (e) => e is Exception);
+    }, test: (e) => e is HttpException);
 
     if (transaction != null) {
       await showDialog(
