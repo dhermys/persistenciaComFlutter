@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:bytebank2/components/progress.dart';
 import 'package:bytebank2/components/response_dialog.dart';
 import 'package:bytebank2/components/transactiom_auth_dialog.dart';
 import 'package:bytebank2/http/webclients/transaction_webclient.dart';
@@ -38,6 +39,13 @@ class _TransactionFormState extends State<TransactionForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Visibility(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Progress(message: 'Sending...',),
+                ),
+                visible: false,
+              ),
               Text(
                 widget.contact.name,
                 style: const TextStyle(
